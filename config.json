@@ -1,0 +1,5 @@
+{
+  "uploadfolder": "./uploading/",
+  "movefoler": "./done/",
+  "jwt_secret": "jwt-secret"
+}
