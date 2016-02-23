@@ -1,7 +1,7 @@
 var fs = require('fs');
 var config = require('./config.json');
 var express = require('express');
-var jwt = require('jwt-simple');
+var jsonwebtoken = require('jsonwebtoken');
 var app = express();
 var multer = require('multer');
 var uuid = require('node-uuid');
@@ -37,7 +37,7 @@ function auth(req, res, next) {
     if (req.get('X-UPLOAD-TOKEN') && req.body.id && !isNaN(parseInt(req.body.id))) {
         var token = req.get('X-UPLOAD-TOKEN');
         var id = parseInt(req.body.id);
-        var decoded = parseInt(jwt.decode(token, config.jwt_secret, 'HS512'));
+        var decoded = parseInt(jsonwebtoken.decode(token, config.jwt_secret, 'HS512').subject);
         if (decoded === id) {
             console.log(`auth succeeded for id: ${id}`);
             next();
