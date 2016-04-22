@@ -18,6 +18,11 @@ var storage = multer.diskStorage({
 
 var upload = multer({storage: storage});
 
+app.get('/', function (req, res) {
+    res.status(200);
+    res.end('Breakout Media Uploader');
+});
+
 app.post('/', upload.single('file'), auth, function (req, res) {
     var tofile = `${config.movefoler}${req.body.id}###${req.file.originalname}`;
     fs.rename(req.file.path, tofile, function (err) {
