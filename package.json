@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "eslint": "eslint ."
   },
   "author": "Philipp Piwowarsky",
   "license": "MIT",
@@ -13,7 +14,10 @@
     "jsonwebtoken": "^5.7.0",
     "mime": "latest",
     "multer": "^1.1.0",
-    "node-uuid": "^1.4.7"
+    "node-uuid": "^1.4.7",
     "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0"
   }
 }
