@@ -1,11 +1,31 @@
 var fs = require('fs');
-var config = require('./config.json');
 var express = require('express');
 var jsonwebtoken = require('jsonwebtoken');
 var app = express();
 var multer = require('multer');
 var uuid = require('node-uuid');
 var mime = require('mime');
+
+const handler  = {
+    get (target, key) {
+
+        console.log(`Accessing config key: ${key}`);
+
+        if(process.env[key.toUpperCase()]) {
+          console.log(`Loading config key '${key.toUpperCase()}' from process.env`);
+          return process.env[key.toUpperCase()];
+        } else if(target[key]) {
+          console.log(`Loading config key '${key}' from config.json`);
+          return target[key];
+        } else {
+            throw Error(`Neither process.env nor config.json contain key ${key}`);
+        }
+    }
+};
+
+const target = require('./config.json');
+
+const config = new Proxy(target, handler);
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
