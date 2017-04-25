@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:4
+FROM mhart/alpine-node:6.10.2
 
 COPY . /src
 WORKDIR /src
